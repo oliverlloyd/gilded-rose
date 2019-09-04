@@ -40,15 +40,14 @@ export class GildedRose {
     const isExpired = (item: Item) => item.sellIn < 0;
 
     return this.items.map(item => {
-      if (item.name === SULFURAS) {
-        return item;
-      }
-
-      reduceSellIn(item);
-
       switch (item.name) {
+        case SULFURAS: {
+          return item;
+        }
         case BACKSTAGE_PASS:
           {
+            reduceSellIn(item);
+
             if (isExpired(item)) {
               item.quality = 0;
             } else if (item.sellIn < 6) {
@@ -62,6 +61,8 @@ export class GildedRose {
           break;
         case AGED_BRIE:
           {
+            reduceSellIn(item);
+
             if (isExpired(item)) {
               adjustQuality(item, 2);
             } else {
@@ -70,6 +71,8 @@ export class GildedRose {
           }
           break;
         default: {
+          reduceSellIn(item);
+
           if (isExpired(item)) {
             adjustQuality(item, -2);
           } else {
