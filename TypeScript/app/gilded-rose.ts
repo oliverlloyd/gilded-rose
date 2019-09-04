@@ -35,6 +35,8 @@ export class GildedRose {
       return item;
     };
 
+    const reduceSellIn = (item: Item) => item.sellIn--;
+
     return this.items.map(item => {
       if (item.name === SULFURAS) {
         return item;
@@ -58,7 +60,7 @@ export class GildedRose {
         }
       }
 
-      item.sellIn = item.sellIn - 1;
+      reduceSellIn(item);
 
       if (item.sellIn < 0) {
         if (item.name === AGED_BRIE) {
