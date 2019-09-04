@@ -70,6 +70,17 @@ export class GildedRose {
             }
           }
           break;
+        case CONJURED_MANA:
+          {
+            reduceSellIn(item);
+
+            if (isExpired(item)) {
+              adjustQuality(item, -4);
+            } else {
+              adjustQuality(item, -2);
+            }
+          }
+          break;
         default: {
           reduceSellIn(item);
 
