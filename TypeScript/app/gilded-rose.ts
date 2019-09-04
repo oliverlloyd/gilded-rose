@@ -44,18 +44,26 @@ export class GildedRose {
         return item;
       }
 
-      if (item.name === AGED_BRIE) {
-        adjustQuality(item, 1);
-      } else if (item.name === BACKSTAGE_PASS) {
-        if (item.sellIn < 6) {
-          adjustQuality(item, 3);
-        } else if (item.sellIn < 11) {
-          adjustQuality(item, 2);
-        } else {
-          adjustQuality(item, 1);
+      switch (item.name) {
+        case BACKSTAGE_PASS:
+          {
+            if (item.sellIn < 6) {
+              adjustQuality(item, 3);
+            } else if (item.sellIn < 11) {
+              adjustQuality(item, 2);
+            } else {
+              adjustQuality(item, 1);
+            }
+          }
+          break;
+        case AGED_BRIE:
+          {
+            adjustQuality(item, 1);
+          }
+          break;
+        default: {
+          adjustQuality(item, -1);
         }
-      } else {
-        adjustQuality(item, -1);
       }
 
       reduceSellIn(item);
