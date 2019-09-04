@@ -37,6 +37,8 @@ export class GildedRose {
 
     const reduceSellIn = (item: Item) => item.sellIn--;
 
+    const isExpired = (item: Item) => item.sellIn < 0;
+
     return this.items.map(item => {
       if (item.name === SULFURAS) {
         return item;
@@ -62,7 +64,7 @@ export class GildedRose {
 
       reduceSellIn(item);
 
-      if (item.sellIn < 0) {
+      if (isExpired(item)) {
         if (item.name === AGED_BRIE) {
           adjustQuality(item, 1);
         } else {
