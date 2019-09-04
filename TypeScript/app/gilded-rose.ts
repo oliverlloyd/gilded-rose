@@ -54,8 +54,8 @@ export class GildedRose {
         } else {
           adjustQuality(item, 1);
         }
-      } else if (item.quality > 0) {
-        item.quality = item.quality - 1;
+      } else {
+        adjustQuality(item, -1);
       }
 
       reduceSellIn(item);
