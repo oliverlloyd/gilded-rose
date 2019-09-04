@@ -37,32 +37,95 @@ import { Item, GildedRose } from "../app/gilded-rose";
 // Conjured Mana Cake 2 5
 
 describe("Gilded Rose", function() {
-  it("should foo", function() {
-    const gildedRose = new GildedRose([new Item("foo", 0, 0)]);
+  it("should reduce quality by one", () => {
+    const gildedRose = new GildedRose([
+      new Item("Elixir of the Mongoose", 5, 8)
+    ]);
     const items = gildedRose.updateQuality();
-    expect(items[0].name).to.equal("fixme");
+    expect(items[0].quality).to.equal(7);
   });
 
-  it.todo("should reduce quality by one");
-  it.todo("should reduce the sellIn value by one");
-  it.todo("should not reduce quality below zero");
-  it.todo("should degrade quality twice as fast when an item is expired");
-  it.todo(
-    "should make an exception for Aged Brie and increase quality over time"
-  );
-  it.todo("should not allow quality to be greater than 50");
-  it.todo("should never degrade the quality of Sulfuras");
-  it.todo(
-    "should pass through negative values for sellIn unchanged for Sulfuras"
-  );
-  it.todo(
-    "should reduce quality for Backstage Passes by 2 when there are less than 11 days left"
-  );
-  it.todo(
-    "should reduce quality for Backstage Passes by 3 when there are less than 6 days left"
-  );
-  it.todo(
-    "should reduce the quality of Backstage Passes to zero once the concert has happened"
-  );
-  it.todo("should degrade the quality of Conjured items twice as fast");
+  it("should reduce the sellIn value by one", () => {
+    const gildedRose = new GildedRose([
+      new Item("Elixir of the Mongoose", 5, 8)
+    ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].sellIn).to.equal(4);
+  });
+
+  it("should not reduce quality below zero", () => {
+    const gildedRose = new GildedRose([
+      new Item("Elixir of the Mongoose", 5, 0)
+    ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(0);
+  });
+
+  it("should degrade quality twice as fast when an item is expired", () => {
+    const gildedRose = new GildedRose([
+      new Item("Elixir of the Mongoose", 0, 10)
+    ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(8);
+  });
+
+  it("should make an exception for Aged Brie and increase quality over time", () => {
+    const gildedRose = new GildedRose([new Item("Aged Brie", 5, 10)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(11);
+  });
+
+  it("should not allow quality to be greater than 50", () => {
+    const gildedRose = new GildedRose([new Item("Aged Brie", 5, 50)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(50);
+  });
+
+  it("should never degrade the quality of Sulfuras", () => {
+    const gildedRose = new GildedRose([
+      new Item("Sulfuras, Hand of Ragnaros", 5, 5)
+    ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(5);
+  });
+
+  it("should pass through negative values for sellIn unchanged for Sulfuras", () => {
+    const gildedRose = new GildedRose([
+      new Item("Sulfuras, Hand of Ragnaros", -2, 5)
+    ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].sellIn).to.equal(-2);
+  });
+
+  describe("when dealing with backstage passes", () => {
+    it("should reduce quality by 2 when there are less than 11 days left", function() {
+      const gildedRose = new GildedRose([
+        new Item("Backstage passes to a TAFKAL80ETC concert", 7, 5)
+      ]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).to.equal(7);
+    });
+
+    it("should reduce quality by 3 when there are less than 6 days left", function() {
+      const gildedRose = new GildedRose([
+        new Item("Backstage passes to a TAFKAL80ETC concert", 5, 5)
+      ]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).to.equal(8);
+    });
+
+    it("should reduce the quality of Backstage Passes to zero once the concert has happened", function() {
+      const gildedRose = new GildedRose([
+        new Item("Backstage passes to a TAFKAL80ETC concert", 0, 5)
+      ]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).to.equal(0);
+    });
+  });
+
+  it("should degrade the quality of Conjured items twice as fast", function() {
+    const gildedRose = new GildedRose([new Item("Conjured Mana Cake", 4, 5)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(3);
+  });
 });
