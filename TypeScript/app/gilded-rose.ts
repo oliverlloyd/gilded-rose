@@ -62,19 +62,19 @@ export class GildedRose {
           break;
         case AGED_BRIE:
           {
-            adjustQuality(item, 1);
+            if (isExpired(item)) {
+              adjustQuality(item, 2);
+            } else {
+              adjustQuality(item, 1);
+            }
           }
           break;
         default: {
-          adjustQuality(item, -1);
-        }
-      }
-
-      if (isExpired(item)) {
-        if (item.name === AGED_BRIE) {
-          adjustQuality(item, 1);
-        } else {
-          adjustQuality(item, -1);
+          if (isExpired(item)) {
+            adjustQuality(item, -2);
+          } else {
+            adjustQuality(item, -1);
+          }
         }
       }
 
