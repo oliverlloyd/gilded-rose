@@ -42,4 +42,27 @@ describe("Gilded Rose", function() {
     const items = gildedRose.updateQuality();
     expect(items[0].name).to.equal("fixme");
   });
+
+  it.todo("should reduce quality by one");
+  it.todo("should reduce the sellIn value by one");
+  it.todo("should not reduce quality below zero");
+  it.todo("should degrade quality twice as fast when an item is expired");
+  it.todo(
+    "should make an exception for Aged Brie and increase quality over time"
+  );
+  it.todo("should not allow quality to be greater than 50");
+  it.todo("should never degrade the quality of Sulfuras");
+  it.todo(
+    "should pass through negative values for sellIn unchanged for Sulfuras"
+  );
+  it.todo(
+    "should reduce quality for Backstage Passes by 2 when there are less than 11 days left"
+  );
+  it.todo(
+    "should reduce quality for Backstage Passes by 3 when there are less than 6 days left"
+  );
+  it.todo(
+    "should reduce the quality of Backstage Passes to zero once the concert has happened"
+  );
+  it.todo("should degrade the quality of Conjured items twice as fast");
 });
