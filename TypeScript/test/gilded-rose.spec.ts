@@ -128,4 +128,10 @@ describe("Gilded Rose", function() {
     const items = gildedRose.endOfDayBatch();
     expect(items[0].quality).to.equal(3);
   });
+
+  it("should degrade the quality of expired Conjured items twice as fast", function() {
+    const gildedRose = new GildedRose([new Item("Conjured Mana Cake", -1, 5)]);
+    const items = gildedRose.endOfDayBatch();
+    expect(items[0].quality).to.equal(1);
+  });
 });
