@@ -47,14 +47,12 @@ export class GildedRose {
       if (item.name === AGED_BRIE) {
         adjustQuality(item, 1);
       } else if (item.name === BACKSTAGE_PASS) {
-        adjustQuality(item, 1);
-        if (item.name == BACKSTAGE_PASS) {
-          if (item.sellIn < 11) {
-            adjustQuality(item, 1);
-          }
-          if (item.sellIn < 6) {
-            adjustQuality(item, 1);
-          }
+        if (item.sellIn < 6) {
+          adjustQuality(item, 3);
+        } else if (item.sellIn < 11) {
+          adjustQuality(item, 2);
+        } else {
+          adjustQuality(item, 1);
         }
       } else if (item.quality > 0) {
         item.quality = item.quality - 1;
