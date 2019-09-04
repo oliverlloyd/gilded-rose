@@ -66,7 +66,7 @@ export class GildedRose {
         if (item.name === AGED_BRIE) {
           adjustQuality(item, 1);
         } else if (item.name === BACKSTAGE_PASS) {
-          item.quality = item.quality - item.quality;
+          item.quality = 0;
         } else {
           adjustQuality(item, -1);
         }
