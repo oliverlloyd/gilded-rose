@@ -56,10 +56,8 @@ export class GildedRose {
             }
           }
         }
-      } else {
-        if (item.quality > 0) {
-          item.quality = item.quality - 1;
-        }
+      } else if (item.quality > 0) {
+        item.quality = item.quality - 1;
       }
 
       reduceSellIn(item);
@@ -67,12 +65,10 @@ export class GildedRose {
       if (isExpired(item)) {
         if (item.name === AGED_BRIE) {
           adjustQuality(item, 1);
+        } else if (item.name === BACKSTAGE_PASS) {
+          item.quality = item.quality - item.quality;
         } else {
-          if (item.name === BACKSTAGE_PASS) {
-            item.quality = item.quality - item.quality;
-          } else {
-            adjustQuality(item, -1);
-          }
+          adjustQuality(item, -1);
         }
       }
 
