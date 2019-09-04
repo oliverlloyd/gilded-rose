@@ -27,7 +27,7 @@ export class GildedRose {
     this.items = items;
   }
 
-  updateQuality() {
+  endOfDayBatch() {
     const adjustQuality = (item: Item, amount: number) => {
       item.quality += amount;
       if (item.quality > MAX_QUALITY) item.quality = MAX_QUALITY;

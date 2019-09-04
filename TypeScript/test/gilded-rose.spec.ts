@@ -41,7 +41,7 @@ describe("Gilded Rose", function() {
     const gildedRose = new GildedRose([
       new Item("Elixir of the Mongoose", 5, 8)
     ]);
-    const items = gildedRose.updateQuality();
+    const items = gildedRose.endOfDayBatch();
     expect(items[0].quality).to.equal(7);
   });
 
@@ -49,7 +49,7 @@ describe("Gilded Rose", function() {
     const gildedRose = new GildedRose([
       new Item("Elixir of the Mongoose", 5, 8)
     ]);
-    const items = gildedRose.updateQuality();
+    const items = gildedRose.endOfDayBatch();
     expect(items[0].sellIn).to.equal(4);
   });
 
@@ -57,7 +57,7 @@ describe("Gilded Rose", function() {
     const gildedRose = new GildedRose([
       new Item("Elixir of the Mongoose", 5, 0)
     ]);
-    const items = gildedRose.updateQuality();
+    const items = gildedRose.endOfDayBatch();
     expect(items[0].quality).to.equal(0);
   });
 
@@ -65,19 +65,19 @@ describe("Gilded Rose", function() {
     const gildedRose = new GildedRose([
       new Item("Elixir of the Mongoose", 0, 10)
     ]);
-    const items = gildedRose.updateQuality();
+    const items = gildedRose.endOfDayBatch();
     expect(items[0].quality).to.equal(8);
   });
 
   it("should make an exception for Aged Brie and increase quality over time", () => {
     const gildedRose = new GildedRose([new Item("Aged Brie", 5, 10)]);
-    const items = gildedRose.updateQuality();
+    const items = gildedRose.endOfDayBatch();
     expect(items[0].quality).to.equal(11);
   });
 
   it("should not allow quality to be greater than 50", () => {
     const gildedRose = new GildedRose([new Item("Aged Brie", 5, 50)]);
-    const items = gildedRose.updateQuality();
+    const items = gildedRose.endOfDayBatch();
     expect(items[0].quality).to.equal(50);
   });
 
@@ -85,7 +85,7 @@ describe("Gilded Rose", function() {
     const gildedRose = new GildedRose([
       new Item("Sulfuras, Hand of Ragnaros", 5, 5)
     ]);
-    const items = gildedRose.updateQuality();
+    const items = gildedRose.endOfDayBatch();
     expect(items[0].quality).to.equal(5);
   });
 
@@ -93,7 +93,7 @@ describe("Gilded Rose", function() {
     const gildedRose = new GildedRose([
       new Item("Sulfuras, Hand of Ragnaros", -2, 5)
     ]);
-    const items = gildedRose.updateQuality();
+    const items = gildedRose.endOfDayBatch();
     expect(items[0].sellIn).to.equal(-2);
   });
 
@@ -102,7 +102,7 @@ describe("Gilded Rose", function() {
       const gildedRose = new GildedRose([
         new Item("Backstage passes to a TAFKAL80ETC concert", 7, 5)
       ]);
-      const items = gildedRose.updateQuality();
+      const items = gildedRose.endOfDayBatch();
       expect(items[0].quality).to.equal(7);
     });
 
@@ -110,7 +110,7 @@ describe("Gilded Rose", function() {
       const gildedRose = new GildedRose([
         new Item("Backstage passes to a TAFKAL80ETC concert", 5, 5)
       ]);
-      const items = gildedRose.updateQuality();
+      const items = gildedRose.endOfDayBatch();
       expect(items[0].quality).to.equal(8);
     });
 
@@ -118,14 +118,14 @@ describe("Gilded Rose", function() {
       const gildedRose = new GildedRose([
         new Item("Backstage passes to a TAFKAL80ETC concert", 0, 5)
       ]);
-      const items = gildedRose.updateQuality();
+      const items = gildedRose.endOfDayBatch();
       expect(items[0].quality).to.equal(0);
     });
   });
 
   it("should degrade the quality of Conjured items twice as fast", function() {
     const gildedRose = new GildedRose([new Item("Conjured Mana Cake", 4, 5)]);
-    const items = gildedRose.updateQuality();
+    const items = gildedRose.endOfDayBatch();
     expect(items[0].quality).to.equal(3);
   });
 });
