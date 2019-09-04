@@ -6,15 +6,21 @@
     "precompile": "rimraf app/**/*.js test/**/*.js",
     "compile": "tsc",
     "pretest": "rimraf app/**/*.js test/**/*.js",
-    "test": "nyc mocha"
+    "test": "jest"
   },
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-typescript": "^7.3.3",
     "@types/chai": "~3.5.2",
+    "@types/jest": "^24.0.18",
     "@types/mocha": "~2.2.41",
     "@types/node": "~7.0.18",
+    "babel-jest": "^24.9.0",
     "chai": "~3.5.0",
+    "jest": "^24.9.0",
     "mocha": "~3.2.0",
     "nyc": "~11.0.3",
     "rimraf": "~2.5.2",
@@ -39,4 +45,3 @@
     ]
   }
 }
-
