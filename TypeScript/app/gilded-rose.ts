@@ -4,7 +4,8 @@ import {
   ELIXIR,
   SULFURAS,
   BACKSTAGE_PASS,
-  CONJURED_MANA
+  CONJURED_MANA,
+  MAX_QUALITY
 } from "./config";
 
 export class Item {
@@ -38,16 +39,16 @@ export class GildedRose {
           }
         }
       } else {
-        if (this.items[i].quality < 50) {
+        if (this.items[i].quality < MAX_QUALITY) {
           this.items[i].quality = this.items[i].quality + 1;
           if (this.items[i].name == BACKSTAGE_PASS) {
             if (this.items[i].sellIn < 11) {
-              if (this.items[i].quality < 50) {
+              if (this.items[i].quality < MAX_QUALITY) {
                 this.items[i].quality = this.items[i].quality + 1;
               }
             }
             if (this.items[i].sellIn < 6) {
-              if (this.items[i].quality < 50) {
+              if (this.items[i].quality < MAX_QUALITY) {
                 this.items[i].quality = this.items[i].quality + 1;
               }
             }
@@ -70,7 +71,7 @@ export class GildedRose {
               this.items[i].quality - this.items[i].quality;
           }
         } else {
-          if (this.items[i].quality < 50) {
+          if (this.items[i].quality < MAX_QUALITY) {
             this.items[i].quality = this.items[i].quality + 1;
           }
         }
