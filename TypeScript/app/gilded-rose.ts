@@ -44,10 +44,14 @@ export class GildedRose {
         return item;
       }
 
+      reduceSellIn(item);
+
       switch (item.name) {
         case BACKSTAGE_PASS:
           {
-            if (item.sellIn < 6) {
+            if (isExpired(item)) {
+              item.quality = 0;
+            } else if (item.sellIn < 6) {
               adjustQuality(item, 3);
             } else if (item.sellIn < 11) {
               adjustQuality(item, 2);
@@ -66,13 +70,9 @@ export class GildedRose {
         }
       }
 
-      reduceSellIn(item);
-
       if (isExpired(item)) {
         if (item.name === AGED_BRIE) {
           adjustQuality(item, 1);
-        } else if (item.name === BACKSTAGE_PASS) {
-          item.quality = 0;
         } else {
           adjustQuality(item, -1);
         }
